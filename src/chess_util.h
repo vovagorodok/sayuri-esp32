@@ -243,7 +243,7 @@ namespace Sayuri {
     inline constexpr Bitboard INIT_PAWN_ATTACK(Side side, Square square) {
       return side == WHITE
       ? (SHIFT_RU(SQUARE_BB(square)) | SHIFT_LU(SQUARE_BB(square)))
-      
+
       : (side == BLACK
       ? (SHIFT_RD(SQUARE_BB(square)) | SHIFT_LD(SQUARE_BB(square)))
 
@@ -350,7 +350,7 @@ namespace Sayuri {
       // --- 変換 --- //
       /** 0度から45度に変換。 [マス] */
       static constexpr Square ROT45[NUM_SQUARES] {
-        E4, F3, H2, C2, G1, D1, B1, A1,
+        E4, F3, H2, C2, G1, D1, B1_, A1,
         E5, F4, G3, A3, D2, H1, E1, C1,
         D6, F5, G4, H3, B3, E2, A2, F1,
         B7, E6, G5, H4, A4, C3, F2, B2,
@@ -367,13 +367,13 @@ namespace Sayuri {
         E1, E2, E3, E4, E5, E6, E7, E8,
         D1, D2, D3, D4, D5, D6, D7, D8,
         C1, C2, C3, C4, C5, C6, C7, C8,
-        B1, B2, B3, B4, B5, B6, B7, B8,
+        B1_, B2, B3, B4, B5, B6, B7, B8,
         A1, A2, A3, A4, A5, A6, A7, A8
       };
       /** 0度から135度に変換。 [マス] */
       static constexpr Square ROT135[NUM_SQUARES] {
         A1, C1, F1, B2, G2, E3, D4, D5,
-        B1, E1, A2, F2, D3, C4, C5, C6,
+        B1_, E1, A2, F2, D3, C4, C5, C6,
         D1, H1, E2, C3, B4, B5, B6, A7,
         G1, D2, B3, A4, A5, A6, H6, F7,
         C2, A3, H3, H4, H5, G6, E7, B8,
@@ -391,7 +391,7 @@ namespace Sayuri {
         E1, F2, G3, H4,
         D1, E2, F3, G4, H5,
         C1, D2, E3, F4, G5, H6,
-        B1, C2, D3, E4, F5, G6, H7,
+        B1_, C2, D3, E4, F5, G6, H7,
         A1, B2, C3, D4, E5, F6, G7, H8,
         A2, B3, C4, D5, E6, F7, G8,
         A3, B4, C5, D6, E7, F8,
@@ -404,7 +404,7 @@ namespace Sayuri {
       /** 90度から0度に逆変換。 [90度座標のマス] */
       static constexpr Square R_ROT90[NUM_SQUARES] {
         A8, A7, A6, A5, A4, A3, A2, A1,
-        B8, B7, B6, B5, B4, B3, B2, B1,
+        B8, B7, B6, B5, B4, B3, B2, B1_,
         C8, C7, C6, C5, C4, C3, C2, C1,
         D8, D7, D6, D5, D4, D3, D2, D1,
         E8, E7, E6, E5, E4, E3, E2, E1,
@@ -415,7 +415,7 @@ namespace Sayuri {
       /** 135度から0度に逆変換。 [135度座標のマス] */
       static constexpr Square R_ROT135[NUM_SQUARES] {
         A1,
-        A2, B1,
+        A2, B1_,
         A3, B2, C1,
         A4, B3, C2, D1,
         A5, B4, C3, D2, E1,
@@ -440,7 +440,7 @@ namespace Sayuri {
         A4, B4, C4, D4, E4, F4, G4, H4,
         A3, B3, C3, D3, E3, F3, G3, H3,
         A2, B2, C2, D2, E2, F2, G2, H2,
-        A1, B1, C1, D1, E1, F1, G1, H1
+        A1, B1_, C1, D1, E1, F1, G1, H1
       };
 
       /**
@@ -462,7 +462,7 @@ namespace Sayuri {
       // ================== //
       /** 0度のマスのビットボード。 [マス] */
       static constexpr Bitboard SQUARE0[NUM_SQUARES] {
-        MetaUtil::SQUARE_BB(A1), MetaUtil::SQUARE_BB(B1),
+        MetaUtil::SQUARE_BB(A1), MetaUtil::SQUARE_BB(B1_),
         MetaUtil::SQUARE_BB(C1), MetaUtil::SQUARE_BB(D1),
         MetaUtil::SQUARE_BB(E1), MetaUtil::SQUARE_BB(F1),
         MetaUtil::SQUARE_BB(G1), MetaUtil::SQUARE_BB(H1),
@@ -509,8 +509,8 @@ namespace Sayuri {
           SQUARE0[ROT90[A1]], SQUARE0[ROT135[A1]]
         },
         {
-          SQUARE0[B1], SQUARE0[ROT45[B1]],
-          SQUARE0[ROT90[B1]], SQUARE0[ROT135[B1]]
+          SQUARE0[B1_], SQUARE0[ROT45[B1_]],
+          SQUARE0[ROT90[B1_]], SQUARE0[ROT135[B1_]]
         },
         {
           SQUARE0[C1], SQUARE0[ROT45[C1]],
@@ -802,7 +802,7 @@ namespace Sayuri {
         },
         {
           MetaUtil::INIT_PAWN_MOVE(WHITE, A1),
-          MetaUtil::INIT_PAWN_MOVE(WHITE, B1),
+          MetaUtil::INIT_PAWN_MOVE(WHITE, B1_),
           MetaUtil::INIT_PAWN_MOVE(WHITE, C1),
           MetaUtil::INIT_PAWN_MOVE(WHITE, D1),
           MetaUtil::INIT_PAWN_MOVE(WHITE, E1),
@@ -875,7 +875,7 @@ namespace Sayuri {
         },
         {
           MetaUtil:: INIT_PAWN_MOVE(BLACK, A1),
-          MetaUtil::INIT_PAWN_MOVE(BLACK, B1),
+          MetaUtil::INIT_PAWN_MOVE(BLACK, B1_),
           MetaUtil::INIT_PAWN_MOVE(BLACK, C1),
           MetaUtil::INIT_PAWN_MOVE(BLACK, D1),
           MetaUtil::INIT_PAWN_MOVE(BLACK, E1),
@@ -958,7 +958,7 @@ namespace Sayuri {
         },
         {
           MetaUtil::INIT_PAWN_2STEP_MOVE(WHITE, A1),
-          MetaUtil::INIT_PAWN_2STEP_MOVE(WHITE, B1),
+          MetaUtil::INIT_PAWN_2STEP_MOVE(WHITE, B1_),
           MetaUtil::INIT_PAWN_2STEP_MOVE(WHITE, C1),
           MetaUtil::INIT_PAWN_2STEP_MOVE(WHITE, D1),
           MetaUtil::INIT_PAWN_2STEP_MOVE(WHITE, E1),
@@ -1031,7 +1031,7 @@ namespace Sayuri {
         },
         {
           MetaUtil::INIT_PAWN_2STEP_MOVE(BLACK, A1),
-          MetaUtil::INIT_PAWN_2STEP_MOVE(BLACK, B1),
+          MetaUtil::INIT_PAWN_2STEP_MOVE(BLACK, B1_),
           MetaUtil::INIT_PAWN_2STEP_MOVE(BLACK, C1),
           MetaUtil::INIT_PAWN_2STEP_MOVE(BLACK, D1),
           MetaUtil::INIT_PAWN_2STEP_MOVE(BLACK, E1),
@@ -1114,7 +1114,7 @@ namespace Sayuri {
         },
         {
           MetaUtil::INIT_PAWN_ATTACK(WHITE, A1),
-          MetaUtil::INIT_PAWN_ATTACK(WHITE, B1),
+          MetaUtil::INIT_PAWN_ATTACK(WHITE, B1_),
           MetaUtil::INIT_PAWN_ATTACK(WHITE, C1),
           MetaUtil::INIT_PAWN_ATTACK(WHITE, D1),
           MetaUtil::INIT_PAWN_ATTACK(WHITE, E1),
@@ -1187,7 +1187,7 @@ namespace Sayuri {
         },
         {
           MetaUtil::INIT_PAWN_ATTACK(BLACK, A1),
-          MetaUtil::INIT_PAWN_ATTACK(BLACK, B1),
+          MetaUtil::INIT_PAWN_ATTACK(BLACK, B1_),
           MetaUtil::INIT_PAWN_ATTACK(BLACK, C1),
           MetaUtil::INIT_PAWN_ATTACK(BLACK, D1),
           MetaUtil::INIT_PAWN_ATTACK(BLACK, E1),
@@ -1262,7 +1262,7 @@ namespace Sayuri {
 
       /** ナイトの動きの配列。 [マス] */
       static constexpr Bitboard KNIGHT_MOVE[NUM_SQUARES] {
-        MetaUtil::INIT_KNIGHT_MOVE(A1), MetaUtil::INIT_KNIGHT_MOVE(B1),
+        MetaUtil::INIT_KNIGHT_MOVE(A1), MetaUtil::INIT_KNIGHT_MOVE(B1_),
         MetaUtil::INIT_KNIGHT_MOVE(C1), MetaUtil::INIT_KNIGHT_MOVE(D1),
         MetaUtil::INIT_KNIGHT_MOVE(E1), MetaUtil::INIT_KNIGHT_MOVE(F1),
         MetaUtil::INIT_KNIGHT_MOVE(G1), MetaUtil::INIT_KNIGHT_MOVE(H1),
@@ -1305,7 +1305,7 @@ namespace Sayuri {
 
       /** ビショップの動きの配列。 [マス] */
       static constexpr Bitboard BISHOP_MOVE[NUM_SQUARES] {
-        MetaUtil::INIT_BISHOP_MOVE(A1), MetaUtil::INIT_BISHOP_MOVE(B1),
+        MetaUtil::INIT_BISHOP_MOVE(A1), MetaUtil::INIT_BISHOP_MOVE(B1_),
         MetaUtil::INIT_BISHOP_MOVE(C1), MetaUtil::INIT_BISHOP_MOVE(D1),
         MetaUtil::INIT_BISHOP_MOVE(E1), MetaUtil::INIT_BISHOP_MOVE(F1),
         MetaUtil::INIT_BISHOP_MOVE(G1), MetaUtil::INIT_BISHOP_MOVE(H1),
@@ -1348,7 +1348,7 @@ namespace Sayuri {
 
       /** ルークの動きの配列。 [マス] */
       static constexpr Bitboard ROOK_MOVE[NUM_SQUARES] {
-        MetaUtil::INIT_ROOK_MOVE(A1), MetaUtil::INIT_ROOK_MOVE(B1),
+        MetaUtil::INIT_ROOK_MOVE(A1), MetaUtil::INIT_ROOK_MOVE(B1_),
         MetaUtil::INIT_ROOK_MOVE(C1), MetaUtil::INIT_ROOK_MOVE(D1),
         MetaUtil::INIT_ROOK_MOVE(E1), MetaUtil::INIT_ROOK_MOVE(F1),
         MetaUtil::INIT_ROOK_MOVE(G1), MetaUtil::INIT_ROOK_MOVE(H1),
@@ -1391,7 +1391,7 @@ namespace Sayuri {
 
       /** クイーンの動きの配列。 [マス] */
       static constexpr Bitboard QUEEN_MOVE[NUM_SQUARES] {
-        MetaUtil::INIT_QUEEN_MOVE(A1), MetaUtil::INIT_QUEEN_MOVE(B1),
+        MetaUtil::INIT_QUEEN_MOVE(A1), MetaUtil::INIT_QUEEN_MOVE(B1_),
         MetaUtil::INIT_QUEEN_MOVE(C1), MetaUtil::INIT_QUEEN_MOVE(D1),
         MetaUtil::INIT_QUEEN_MOVE(E1), MetaUtil::INIT_QUEEN_MOVE(F1),
         MetaUtil::INIT_QUEEN_MOVE(G1), MetaUtil::INIT_QUEEN_MOVE(H1),
@@ -1434,7 +1434,7 @@ namespace Sayuri {
 
       /** キングの動きの配列。 [マス] */
       static constexpr Bitboard KING_MOVE[NUM_SQUARES] {
-        MetaUtil::INIT_KING_MOVE(A1), MetaUtil::INIT_KING_MOVE(B1),
+        MetaUtil::INIT_KING_MOVE(A1), MetaUtil::INIT_KING_MOVE(B1_),
         MetaUtil::INIT_KING_MOVE(C1), MetaUtil::INIT_KING_MOVE(D1),
         MetaUtil::INIT_KING_MOVE(E1), MetaUtil::INIT_KING_MOVE(F1),
         MetaUtil::INIT_KING_MOVE(G1), MetaUtil::INIT_KING_MOVE(H1),
@@ -1514,8 +1514,8 @@ namespace Sayuri {
           MAGIC_SHIFT_V[ROT90[A1]], MAGIC_SHIFT_D[ROT135[A1]]
         },
         {
-          MAGIC_SHIFT_V[B1], MAGIC_SHIFT_D[ROT45[B1]],
-          MAGIC_SHIFT_V[ROT90[B1]], MAGIC_SHIFT_D[ROT135[B1]]
+          MAGIC_SHIFT_V[B1_], MAGIC_SHIFT_D[ROT45[B1_]],
+          MAGIC_SHIFT_V[ROT90[B1_]], MAGIC_SHIFT_D[ROT135[B1_]]
         },
         {
           MAGIC_SHIFT_V[C1], MAGIC_SHIFT_D[ROT45[C1]],
@@ -1809,8 +1809,8 @@ namespace Sayuri {
           MAGIC_MASK_V[ROT90[A1]], MAGIC_MASK_D[ROT135[A1]]
         },
         {
-          MAGIC_MASK_V[B1], MAGIC_MASK_D[ROT45[B1]],
-          MAGIC_MASK_V[ROT90[B1]], MAGIC_MASK_D[ROT135[B1]]
+          MAGIC_MASK_V[B1_], MAGIC_MASK_D[ROT45[B1_]],
+          MAGIC_MASK_V[ROT90[B1_]], MAGIC_MASK_D[ROT135[B1_]]
         },
         {
           MAGIC_MASK_V[C1], MAGIC_MASK_D[ROT45[C1]],
@@ -2548,7 +2548,7 @@ namespace Sayuri {
         return ret;
       }
 
-      /** 
+      /**
        * FEN/EPDをパース。
        * @param str パースするFEN/EPd文字列。
        * @return パース後の構文木マップ。

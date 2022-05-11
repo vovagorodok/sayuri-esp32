@@ -62,7 +62,7 @@ namespace Sayuri {
   // static定数 //
   // ========== //
   const std::map<std::string, Square> Sayulisp::SQUARE_MAP {
-    {"A1", A1}, {"B1", B1}, {"C1", C1}, {"D1", D1},
+    {"A1", A1}, {"B1", B1_}, {"C1", C1}, {"D1", D1},
     {"E1", E1}, {"F1", F1}, {"G1", G1}, {"H1", H1},
     {"A2", A2}, {"B2", B2}, {"C2", C2}, {"D2", D2},
     {"E2", E2}, {"F2", F2}, {"G2", G2}, {"H2", H2},
@@ -3866,7 +3866,7 @@ namespace Sayuri {
       // 先ずは白。
       if (!(board.position_[WHITE][QUEEN] & Util::SQUARE[D1][R0])) {
         value += Util::CountBits(board.position_[WHITE][KNIGHT]
-        & (Util::SQUARE[B1][R0] | Util::SQUARE[G1][R0]))
+        & (Util::SQUARE[B1_][R0] | Util::SQUARE[G1][R0]))
         + Util::CountBits(board.position_[WHITE][BISHOP]
         & (Util::SQUARE[C1][R0] | Util::SQUARE[F1][R0]));
       }

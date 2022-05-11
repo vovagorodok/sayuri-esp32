@@ -218,7 +218,7 @@ namespace Sayuri {
     position_[WHITE][PAWN] = Util::RANK[RANK_2];
     position_[BLACK][PAWN] = Util::RANK[RANK_7];
     // ナイト。
-    position_[WHITE][KNIGHT] = Util::SQUARE[B1][R0] | Util::SQUARE[G1][R0];
+    position_[WHITE][KNIGHT] = Util::SQUARE[B1_][R0] | Util::SQUARE[G1][R0];
     position_[BLACK][KNIGHT] = Util::SQUARE[B8][R0] | Util::SQUARE[G8][R0];
     // ビショップ。
     position_[WHITE][BISHOP] = Util::SQUARE[C1][R0] | Util::SQUARE[F1][R0];

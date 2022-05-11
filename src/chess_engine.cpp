@@ -73,25 +73,25 @@ namespace Sayuri {
     // トランスポジションテーブル。
     shared_st_ptr_->table_ptr_ = &table;
 
-    // ムーブメーカー。
-    maker_table_.reset(new MoveMaker[MAX_PLYS + 1]);
-    for (u32 i = 0; i < (MAX_PLYS + 1); ++i) {
-      maker_table_[i] = MoveMaker(*this);
-    }
+    // // ムーブメーカー。
+    // maker_table_.reset(new MoveMaker[MAX_PLYS + 1]);
+    // for (u32 i = 0; i < (MAX_PLYS + 1); ++i) {
+    //   maker_table_[i] = MoveMaker(*this);
+    // }
 
-    // PVLine。
-    pv_line_table_.reset(new PVLine[MAX_PLYS + 1]);
+    // // PVLine。
+    // pv_line_table_.reset(new PVLine[MAX_PLYS + 1]);
 
-    // Job。
-    job_table_.reset(new Job[MAX_PLYS + 1]);
-    for (u32 i = 0; i < (MAX_PLYS + 1); ++i) {
-      job_table_[i].client_ptr_ = this;
-      job_table_[i].level_ = i;
-    }
+    // // Job。
+    // job_table_.reset(new Job[MAX_PLYS + 1]);
+    // for (u32 i = 0; i < (MAX_PLYS + 1); ++i) {
+    //   job_table_[i].client_ptr_ = this;
+    //   job_table_[i].level_ = i;
+    // }
   }
 
   // プライベートコンストラクタ。
-  ChessEngine::ChessEngine() : 
+  ChessEngine::ChessEngine() :
   is_null_searching_(false),
   evaluator_(*this) {
     SetNewGame();
@@ -122,7 +122,7 @@ namespace Sayuri {
     basic_st_ = engine.basic_st_;
 
     // 共有メンバのコピー。
-    shared_st_ptr_.reset(new SharedStruct(*(engine.shared_st_ptr_)));
+    // shared_st_ptr_.reset(new SharedStruct(*(engine.shared_st_ptr_)));
 
     // ムーブメーカー。
     maker_table_.reset(new MoveMaker[MAX_PLYS + 1]);
@@ -175,7 +175,7 @@ namespace Sayuri {
     basic_st_ = engine.basic_st_;
 
     // 共有メンバをコピー。
-    shared_st_ptr_.reset(new SharedStruct(*(engine.shared_st_ptr_)));
+    // shared_st_ptr_.reset(new SharedStruct(*(engine.shared_st_ptr_)));
 
     return *this;
   }
@@ -274,7 +274,7 @@ namespace Sayuri {
       {
         0,
         Util::RANK[RANK_2],
-        Util::SQUARE[B1][R0] | Util::SQUARE[G1][R0],
+        Util::SQUARE[B1_][R0] | Util::SQUARE[G1][R0],
         Util::SQUARE[C1][R0] | Util::SQUARE[F1][R0],
         Util::SQUARE[A1][R0] | Util::SQUARE[H1][R0],
         Util::SQUARE[D1][R0],
@@ -380,24 +380,24 @@ namespace Sayuri {
     SetStartPosition();
 
     // 共有メンバ構造体を初期化。
-    const SearchParams* temp_sp_ptr = nullptr;
-    const EvalParams* temp_ep_ptr = nullptr;
-    TranspositionTable* temp_table_ptr = nullptr;
-    if (shared_st_ptr_) {
-      temp_sp_ptr = shared_st_ptr_->search_params_ptr_;  // 一時待避。
-      temp_ep_ptr = shared_st_ptr_->eval_params_ptr_;  // 一時待避。
-      temp_table_ptr = shared_st_ptr_->table_ptr_;  // 一時待避。
-    }
-    shared_st_ptr_.reset(new SharedStruct());
-    shared_st_ptr_->search_params_ptr_ = temp_sp_ptr;  // 復帰。
-    shared_st_ptr_->eval_params_ptr_ = temp_ep_ptr;  // 復帰。
-    shared_st_ptr_->table_ptr_ = temp_table_ptr; // 復帰。
+    // const SearchParams* temp_sp_ptr = nullptr;
+    // const EvalParams* temp_ep_ptr = nullptr;
+    // TranspositionTable* temp_table_ptr = nullptr;
+    // if (shared_st_ptr_) {
+    //   temp_sp_ptr = shared_st_ptr_->search_params_ptr_;  // 一時待避。
+    //   temp_ep_ptr = shared_st_ptr_->eval_params_ptr_;  // 一時待避。
+    //   temp_table_ptr = shared_st_ptr_->table_ptr_;  // 一時待避。
+    // }
+    // shared_st_ptr_.reset(new SharedStruct());
+    // shared_st_ptr_->search_params_ptr_ = temp_sp_ptr;  // 復帰。
+    // shared_st_ptr_->eval_params_ptr_ = temp_ep_ptr;  // 復帰。
+    // shared_st_ptr_->table_ptr_ = temp_table_ptr; // 復帰。
 
-    // 50手ルールの履歴を初期化。
-    shared_st_ptr_->clock_history_.push_back(0);
+    // // 50手ルールの履歴を初期化。
+    // shared_st_ptr_->clock_history_.push_back(0);
 
-    // 駒の配置の履歴を初期化。
-    shared_st_ptr_->position_history_.push_back(PositionRecord(*this));
+    // // 駒の配置の履歴を初期化。
+    // shared_st_ptr_->position_history_.push_back(PositionRecord(*this));
   }
 
   // 探索を開始する。
@@ -1258,7 +1258,7 @@ namespace Sayuri {
       killer_stack_[i + 2][0] = 0;
       killer_stack_[i + 2][1] = 0;
     }
-    helper_queue_ptr_.reset(new HelperQueue());
+    // helper_queue_ptr_.reset(new HelperQueue());
     InitHashValueTable();
   }
 
@@ -1317,7 +1317,7 @@ namespace Sayuri {
     move_history_ = shared_st.move_history_;
     clock_history_ = shared_st.clock_history_;
     position_history_ = shared_st.position_history_;
-    helper_queue_ptr_.reset(new HelperQueue(*(shared_st.helper_queue_ptr_)));
+    // helper_queue_ptr_.reset(new HelperQueue(*(shared_st.helper_queue_ptr_)));
     search_params_ptr_ = shared_st.search_params_ptr_;
     eval_params_ptr_ = shared_st.eval_params_ptr_;
     table_ptr_ = shared_st.table_ptr_;

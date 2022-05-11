@@ -620,7 +620,7 @@ namespace Sayuri {
             Square from = Get<FROM>(best_move);
             Square to = Get<TO>(best_move);
 
-            shared_st_ptr_->history_[side][from][to] += 
+            shared_st_ptr_->history_[side][from][to] +=
             Util::DepthToHistory(job.depth_);
 
             Util::UpdateMax(shared_st_ptr_->history_max_,
@@ -692,7 +692,7 @@ namespace Sayuri {
     pv_line_table_[level].SetMove(temp_maker.PickMove());
 
     // スレッドの準備。
-    shared_st_ptr_->helper_queue_ptr_.reset(new HelperQueue());
+    // shared_st_ptr_->helper_queue_ptr_.reset(new HelperQueue());
     std::vector<std::unique_ptr<ChessEngine>> child_vec(0);
     for (unsigned int i = 0; i < thread_vec_.size(); ++i) {
       child_vec.push_back
@@ -1149,7 +1149,7 @@ namespace Sayuri {
           score = -Search(NodeType::PV, next_hash,
           job.depth_ - 1, job.level_ + 1, -temp_beta, -temp_alpha,
           next_material);
-          
+
           // アルファ値、ベータ値を調べる。
           job.Lock();  // ロック。
           if (score >= temp_beta) {

@@ -36,6 +36,9 @@
 #include <chrono>
 #include <climits>
 
+using u32 = uint32_t;
+using u64 = uint64_t;
+
 /** Sayuri 名前空間。 */
 namespace Sayuri {
 
@@ -90,10 +93,10 @@ IN THE SOFTWARE.)...";
   // UCIオプション //
   // ============= //
   /** トランスポジションテーブルのデフォルトサイズ。 */
-  constexpr std::size_t UCI_DEFAULT_TABLE_SIZE = 1ULL * 1024ULL * 1024ULL;
+  constexpr std::size_t UCI_DEFAULT_TABLE_SIZE = 1ULL * 1024ULL;//* 1024ULL;
 
   /** トランスポジションテーブルの最小サイズ。 */
-  constexpr std::size_t UCI_MIN_TABLE_SIZE = 1ULL * 1024ULL * 1024ULL;
+  constexpr std::size_t UCI_MIN_TABLE_SIZE = 1ULL * 1024ULL;// * 1024ULL;
 
 #if defined(__arm__)  // ARMのCPU用定数。
   /** トランスポジションテーブルの最大サイズ。 (ARM用) */
@@ -104,10 +107,10 @@ IN THE SOFTWARE.)...";
   /** トランスポジションテーブルの最大サイズ。 (32ビットCPU) */
   constexpr std::size_t UCI_MAX_TABLE_SIZE = 1024ULL * 1024ULL * 1024ULL;
 
-#else  // 64ビットCPU用定数。
+#else  // 64ビットCPU用定数。ESP32
   /** トランスポジションテーブルの最大サイズ。 (64ビットCPU) */
   constexpr std::size_t UCI_MAX_TABLE_SIZE =
-  8ULL * 1024ULL * 1024ULL * 1024ULL;
+  8ULL * 1024ULL;// * 1024ULL * 1024ULL;
 
 #endif
 
@@ -200,7 +203,7 @@ for (PieceType var_name = 0; var_name < NUM_PIECE_TYPES; ++var_name)
   using Square = u32;
   /** マスの定数。 */
   enum : Square {
-    A1, B1, C1, D1, E1, F1, G1, H1,
+    A1, B1_, C1, D1, E1, F1, G1, H1,
     A2, B2, C2, D2, E2, F2, G2, H2,
     A3, B3, C3, D3, E3, F3, G3, H3,
     A4, B4, C4, D4, E4, F4, G4, H4,

@@ -48,7 +48,7 @@ namespace Sayuri {
       {0, 0, 0, 0, 0, 0, 0},
       {
         0, Util::RANK[RANK_2],
-        Util::SQUARE[B1][R0] | Util::SQUARE[G1][R0],
+        Util::SQUARE[B1_][R0] | Util::SQUARE[G1][R0],
         Util::SQUARE[C1][R0] | Util::SQUARE[F1][R0],
         Util::SQUARE[A1][R0] | Util::SQUARE[H1][R0],
         Util::SQUARE[D1][R0], Util::SQUARE[E1][R0]
@@ -157,7 +157,7 @@ namespace Sayuri {
       && !((board.blocker_[R0]
       & (Util::SQUARE[D1][R0]
       | Util::SQUARE[C1][R0]
-      | Util::SQUARE[B1][R0]))
+      | Util::SQUARE[B1_][R0]))
       || IsAttacked(board, E1, BLACK)
       || IsAttacked(board, D1, BLACK)
       || IsAttacked(board, C1, BLACK));
@@ -399,7 +399,7 @@ namespace Sayuri {
   // スウィートセンターのコントロール。
   ResultSquares AnalyseSweetCenterControl(const Board& board,
   Square piece_square) {
-    static const Bitboard CENTER_BB = 
+    static const Bitboard CENTER_BB =
     Util::SQUARE[D4][R0] | Util::SQUARE[D5][R0]
     | Util::SQUARE[E4][R0] | Util::SQUARE[E5][R0];
 

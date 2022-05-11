@@ -44,7 +44,7 @@ namespace Sayuri {
     // ========================= //
     // Evaluator定数初期化用関数 //
     // ========================= //
-    /** 
+    /**
      * Evaluator::ISO_PAWN_MASKを初期化する。
      * @param fyle そのマスのファイル。
      * @return そのマスに対応したISO_PAWN_MASK。
@@ -96,22 +96,22 @@ namespace Sayuri {
        * @param engine 評価したいエンジン。
        */
       Evaluator(const ChessEngine& engine);
-      /** 
+      /**
        * コピーコンストラクタ。
        * @param eval コピー元。
        */
       Evaluator(const Evaluator& eval);
-      /** 
+      /**
        * ムーブコンストラクタ。
        * @param eval ムーブ元。
        */
       Evaluator(Evaluator&& eval);
-      /** 
+      /**
        * コピー代入演算子。
        * @param eval コピー元。
        */
       Evaluator& operator=(const Evaluator& eval);
-      /** 
+      /**
        * ムーブ代入演算子。
        * @param eval ムーブ元。
        */
@@ -179,7 +179,7 @@ namespace Sayuri {
         {0, 0, 0, 0, 0, 0, 0},
         {
           0, Util::RANK[RANK_2],
-          Util::SQUARE[B1][R0] | Util::SQUARE[G1][R0],
+          Util::SQUARE[B1_][R0] | Util::SQUARE[G1][R0],
           Util::SQUARE[C1][R0] | Util::SQUARE[F1][R0],
           Util::SQUARE[A1][R0] | Util::SQUARE[H1][R0],
           Util::SQUARE[D1][R0], Util::SQUARE[E1][R0]
@@ -214,7 +214,7 @@ namespace Sayuri {
       };
 
       /** センターのマスク。 */
-      static constexpr Bitboard CENTER_MASK = 
+      static constexpr Bitboard CENTER_MASK =
       Util::SQUARE[C3][R0] | Util::SQUARE[C4][R0]
       | Util::SQUARE[C5][R0] | Util::SQUARE[C6][R0]
       | Util::SQUARE[D3][R0] | Util::SQUARE[D4][R0]
@@ -238,7 +238,7 @@ namespace Sayuri {
         },
         {
           MetaEvaluator::INIT_PASS_PAWN_MASK(WHITE, A1),
-          MetaEvaluator::INIT_PASS_PAWN_MASK(WHITE, B1),
+          MetaEvaluator::INIT_PASS_PAWN_MASK(WHITE, B1_),
           MetaEvaluator::INIT_PASS_PAWN_MASK(WHITE, C1),
           MetaEvaluator::INIT_PASS_PAWN_MASK(WHITE, D1),
           MetaEvaluator::INIT_PASS_PAWN_MASK(WHITE, E1),
@@ -311,7 +311,7 @@ namespace Sayuri {
         },
         {
           MetaEvaluator::INIT_PASS_PAWN_MASK(BLACK, A1),
-          MetaEvaluator::INIT_PASS_PAWN_MASK(BLACK, B1),
+          MetaEvaluator::INIT_PASS_PAWN_MASK(BLACK, B1_),
           MetaEvaluator::INIT_PASS_PAWN_MASK(BLACK, C1),
           MetaEvaluator::INIT_PASS_PAWN_MASK(BLACK, D1),
           MetaEvaluator::INIT_PASS_PAWN_MASK(BLACK, E1),

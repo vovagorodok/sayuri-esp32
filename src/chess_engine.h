@@ -322,7 +322,7 @@ namespace Sayuri {
         && !((basic_st_.blocker_[R0]
         & (Util::SQUARE[D1][R0]
         | Util::SQUARE[C1][R0]
-        | Util::SQUARE[B1][R0]))
+        | Util::SQUARE[B1_][R0]))
         || IsAttacked(E1, BLACK)
         || IsAttacked(D1, BLACK)
         || IsAttacked(C1, BLACK));
@@ -957,7 +957,7 @@ namespace Sayuri {
         /** 局面の履歴。 */
         std::vector<PositionRecord> position_history_;
         /** スレッドのキュー。 */
-        std::unique_ptr<HelperQueue> helper_queue_ptr_;
+        HelperQueue* helper_queue_ptr_;
         /** 探索関数用パラメータ。 */
         const SearchParams* search_params_ptr_;
         /** 評価関数用パラメータ。 */
@@ -988,22 +988,22 @@ namespace Sayuri {
         // ==================== //
         /** コンストラクタ。 */
         SharedStruct();
-        /** 
+        /**
          * コピーコンストラクタ。
          * @param shared_st コピー元。
          */
         SharedStruct(const SharedStruct& shared_st);
-        /** 
+        /**
          * ムーブコンストラクタ。
          * @param shared_st ムーブ元。
          */
         SharedStruct(SharedStruct&& shared_st);
-        /** 
+        /**
          * コピー代入演算子。
          * @param shared_st コピー元。
          */
         SharedStruct& operator=(const SharedStruct& shared_st);
-        /** 
+        /**
          * ムーブ代入演算子。
          * @param shared_st ムーブ元。
          */
@@ -1054,7 +1054,7 @@ namespace Sayuri {
         void ThreadPeriodicProcess(UCIShell& shell);
       };
       /** 共有メンバの構造体。 */
-      std::shared_ptr<SharedStruct> shared_st_ptr_;
+      SharedStruct* shared_st_ptr_;
 
       // ===================================================== //
       // 固有メンバ (他のエンジンとコピーも共有もしないメンバ) //

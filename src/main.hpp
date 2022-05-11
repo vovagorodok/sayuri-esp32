@@ -27,6 +27,7 @@
  * @brief メイン関数。
  */
 
+#include <cstdint>
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
